@@ -1,0 +1,44 @@
+@using ExerciciosMVC.ViewModels
+
+@model BuscaEventoViewModel
+@{
+    ViewData["Title"] = "Buscar evento";
+}
+
+<h1>Buscar aluno</h1>
+<form asp-action="Buscar" method="post">
+    <input asp-for="NomeBusca" placeholder="Nome do evento..." />
+    <input asp-for="LocalBusca" placeholder="Local do evento..." />
+    <input asp-for="DataInicial" type="date" />
+    <button type="submit">Buscar</button>
+</form>
+
+@if (Model.Resultados.Any())
+{
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th>Local</th>
+            <th>DataEvento</th>
+            <th>QuantidadeVagas</th>
+            <th>ValorIngresso</th>
+            <th></th>
+        </tr>
+        @foreach (Evento e in Model.Resultados)
+        {
+            <tr>
+                <td>@e.Nome</td>
+                <td>@e.Descricao</td>
+                <td>@e.Local</td>
+                <td>@e.DataEvento.ToShortDateString()</td>
+                <td>@e.QuantidadeVagas.ToString("N0")</td>
+                <td>@e.ValorIngresso.ToString("C")</td>
+            </tr>
+        }
+    </table>
+}
+else if(Context.Request.Method == "POST")
+{
+    <p>Nenhum resultado encontrado!</p>
+}

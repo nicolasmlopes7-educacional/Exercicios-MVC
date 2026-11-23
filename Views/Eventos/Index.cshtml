@@ -1,0 +1,25 @@
+@model List<Evento>
+@{
+    ViewData["Title"] = "Listagem de Eventos";
+}
+
+<h1>Listagem Geral de Eventos</h1>
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Nome</th>
+        <th></th>
+    </tr>
+    @foreach (Evento e in Model)
+    {
+        <tr>
+            <td>@e.Id</td>
+            <td>@e.Nome</td>
+            <td>
+                <a asp-action="Detalhes" asp-route-id="@e.Id">Ver</a>
+            </td>
+            
+        </tr>
+    }
+</table>
